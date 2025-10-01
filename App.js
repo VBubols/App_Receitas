@@ -10,16 +10,21 @@ export default function App() {
     setNavigation(screen)
   } 
 
+  const renderScreen = () => {
+    switch (navigation) {
+      case 'home':
+        return <Home onNavigation={onNavigation}></Home>
+      case 'recipes':
+        return <Recipes onNavigation={onNavigation}></Recipes>
+      default:
+        return <Text onPress={() => onNavigation('home')}>Página não encontrada. Clique para voltar para home.</Text>
+    }
+  }
+
   return (
     <View style={styles.container}>
 
-      {(navigation == 'home') ? (
-        <Home onNavigation={onNavigation}></Home>
-      ) : navigation == 'recipes' ? (
-        <Recipes onNavigation={onNavigation}></Recipes>
-      ) : (
-        <Text onPress={() => onNavigation('home')}>Página não encontrada. Clique para voltar para home.</Text>
-      )}
+    {renderScreen()}
 
     </View>
   );
